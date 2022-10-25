@@ -13,6 +13,20 @@ it('matches snapshot', function () {
   expect(asFragment()).toMatchSnapshot();
 });
 
+it('works when you click on the left arrow', function () {
+  const { queryByTestId, queryByAltText } = render(<Carousel />);
+  const rightArrow = queryByTestId('right-arrow');
+  fireEvent.click(rightArrow);
+
+  const leftArrow = queryByTestId('left-arrow');
+  fireEvent.click(leftArrow);
+  // left arrow goes to previous image
+  expect(
+    queryByAltText('Photo by Richard Pasquarella on Unsplash')
+  ).toBeInTheDocument();
+  // expect the first image to show, and hide the left arrow
+});
+
 it('works when you click on the right arrow', function () {
   const { queryByTestId, queryByAltText } = render(<Carousel />);
 
