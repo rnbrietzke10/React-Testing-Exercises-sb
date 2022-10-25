@@ -15,6 +15,9 @@ it('matches snapshot', function () {
 
 it('works when you click on the left arrow', function () {
   const { queryByTestId, queryByAltText } = render(<Carousel />);
+  // Make sure left arrow not on page when  on first image
+  expect(queryByTestId('left-arrow')).toBeFalsy();
+
   const rightArrow = queryByTestId('right-arrow');
   fireEvent.click(rightArrow);
 
@@ -49,4 +52,6 @@ it('works when you click on the right arrow', function () {
   expect(
     queryByAltText('Photo by Pratik Patel on Unsplash')
   ).toBeInTheDocument();
+  fireEvent.click(rightArrow);
+  expect(queryByTestId('right-arrow')).toBeFalsy();
 });
